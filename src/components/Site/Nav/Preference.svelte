@@ -87,7 +87,7 @@
 
   .controlPanel {
     position: absolute;
-    inset: auto 0 0 0;
+    inset: var(--nav-height) 0 0 0;
     padding: var(--nav-padding);
     display: grid;
     width: 100%;
