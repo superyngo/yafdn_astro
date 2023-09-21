@@ -1,0 +1,36 @@
+---
+import { siteConfig } from '@lib/utils/config.ts'
+import Xsvg from '@assets/X.svg'
+import logo from '@assets/logo.png'
+---
+
+<a href='/' class='siteTitleWrapper'>
+  <strong class='logo'>🖋</strong>
+  <strong class='siteTitle'>{siteConfig.title}</strong>
+</a>
+
+<style>
+  .siteTitleWrapper {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2, auto);
+    gap: 1rem;
+    & .logo {
+      font-size: 3rem;
+    }
+    & .siteTitle {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .siteTitleWrapper {
+      & .logo {
+        font-size: 4rem;
+      }
+      & .siteTitle {
+        font-size: 2rem;
+      }
+    }
+  }
+</style>

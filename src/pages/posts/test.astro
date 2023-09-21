@@ -1,0 +1,31 @@
+---
+let count = 0
+function cl() {
+  console.log(123)
+}
+import Counter from '/src/components/counter.svelte'
+import Snake from '/src/components/Snake.svelte'
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>TEST</title>
+  </head>
+
+  <body>
+    <h1>{count}</h1>
+    <script>
+      function cl() {
+        console.log(213)
+      }
+      cl()
+    </script>
+    <button onclick='cl'>button</button>
+    <Counter client:load />
+    <!-- <Snake client:load/>  -->
+  </body>
+</html>

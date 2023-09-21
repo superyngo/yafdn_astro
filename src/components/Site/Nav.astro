@@ -1,0 +1,48 @@
+---
+import Navigation from './Nav/Navigation.svelte'
+import Preference from './Nav/Preference.svelte'
+import SiteLogo from './Nav/SiteLogo.astro'
+---
+
+<div class='nav'>
+  <div class='navitemWrapper'>
+    <SiteLogo />
+  </div>
+  <div class='navitemWrapper'>
+    <Navigation />
+  </div>
+  <div class='navitemWrapper'>
+    <Preference client:load />
+  </div>
+</div>
+
+<style>
+  .nav {
+    border: 1px solid black;
+    padding: 0 var(--nav-padding);
+    height: var(--nav-height);
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    & .navitemWrapper:first-child {
+      margin-right: auto;
+    }
+    & .navitemWrapper:nth-child(2) {
+      display: none;
+    }
+    & .navitemWrapper:nth-child(3) {
+      margin-left: auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .nav {
+      grid-template-columns: repeat(3, 1fr);
+      & .navitemWrapper:nth-child(2) {
+        display: inline !important;
+        margin: auto;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+
+---
+
+<ul>
+  <li>searchbar</li>
+  <li>
+    <details role='list' dir='rtl'>
+      <summary aria-haspopup='listbox' role='button'>///</summary>
+      <ul role='listbox' class='menuToggle'>
+        <li>
+          <div class='menuItem'>
+            <select id='language'>
+              <option selected value=''>繁體中文</option>
+              <option>English</option>
+              <option>Japnaese</option>
+            </select>
+            <label for='language'><span>Language</span></label>
+          </div>
+        </li>
+        <li>
+          <div class='menuItem'>
+            <select id='theme'>
+              <option selected value=''>Light</option>
+              <option>Dark</option>
+            </select>
+            <label for='theme'><span>Language</span></label>
+          </div>
+        </li>
+        <li>
+          <div class='menuItem'>
+            <input
+              type='range'
+              min='16'
+              max='24'
+              value='20'
+              id='fontSizerange'
+              name='fontSizerange'
+            />
+            <label for='fontSizerange'>Font size : 20px</label>
+          </div>
+        </li>
+        <li>
+          <div class='menuItem'>
+            <input
+              type='range'
+              min='32'
+              max='48'
+              value='40'
+              id='lineHeightRange'
+              name='lineHeightRange'
+            />
+            <label for='lineHeightRange'>Line height : 40px</label>
+          </div>
+        </li>
+        <li><button>Set to defalut</button></li>
+      </ul>
+    </details>
+  </li>
+</ul>
+<style>
+  .menuToggle {
+    width: 20rem;
+    border: 1px solid black;
+    & .menuItem {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      & label {
+        margin: auto 0;
+      }
+    }
+  }
+  .full {
+    width: 100vw;
+    height: calc(100vh - var(--nav-height));
+    translate: var(--nav-margin);
+  }
+</style>
