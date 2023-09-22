@@ -1,8 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { state } from '@lib/stores/state'
+  import GetWindowsWidth from '@components/Tools/svelte/GetWindowsWidth.svelte'
 
   export let windowWidth: number
+  // function googleTranslateElementInit() {
+  //   new google.translate.TranslateElement(
+  //     { pageLanguage: 'zh-TW' },
+  //     'google_translate_element'
+  //   )
+  // }
+  // googleTranslateElementInit()
 
   onMount(() => {
     const nav = document.querySelector('.nav')
@@ -21,4 +29,4 @@
   })
 </script>
 
-<svelte:window bind:innerWidth={windowWidth} />
+<GetWindowsWidth bind:windowWidth />

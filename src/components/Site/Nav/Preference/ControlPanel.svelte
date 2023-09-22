@@ -5,6 +5,22 @@
   export let hide = true
 </script>
 
+<svelte:head>
+  <script>
+    window.gtranslateSettings = {
+      default_language: 'zh-TW',
+      native_language_names: true,
+      detect_browser_language: true,
+      languages: ['zh-TW', 'en', 'ja'],
+      wrapper_selector: '.gtranslate_wrapper'
+    }
+  </script>
+  <script
+    src="https://cdn.gtranslate.net/widgets/latest/dropdown.js"
+    defer
+  ></script>
+</svelte:head>
+
 <div class="controlPanel" use:teleport={'controlPanel-container'} class:hide>
   {#if windowWidth < 768}
     <Navigation />
@@ -12,11 +28,12 @@
   {/if}
   <div class="menuItem">
     <label for="language"><span>Language</span></label>
-    <select id="language">
+    <div class="gtranslate_wrapper"></div>
+    <!-- <select id="language">
       <option selected value="">繁體中文</option>
       <option>English</option>
       <option>Japanese</option>
-    </select>
+    </select> -->
   </div>
   <div class="menuItem">
     <label for="theme"><span>Theme</span></label>

@@ -3,7 +3,7 @@
   import ControlPanelBtns from './Preference/ControlPanelBtns.svelte'
   import ControlPanel from './Preference/ControlPanel.svelte'
   import MyPopover from '@components/UIs/MyPopover.svelte'
-  import NavScript from '../Nav/NavScript.svelte'
+  import GetWindowsWidth from '@components/Tools/svelte/GetWindowsWidth.svelte'
 
   let popover = { hide: true }
   $: {
@@ -12,14 +12,14 @@
   let windowWidth: number
 </script>
 
-<NavScript bind:windowWidth />
+<GetWindowsWidth bind:windowWidth />
 
 <div class="wrapper">
   {#if windowWidth > 768}
     <a href="#" class="searchbar">searchbar</a>
   {/if}
 
-  <MyPopover bind:popover={state.popover}>
+  <MyPopover bind:popover={state.popover} popoverSelector=".controlPanel">
     <span slot="btnContent">
       <ControlPanelBtns bind:popover={state.popover} />
     </span>
