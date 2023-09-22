@@ -1,8 +1,9 @@
 ---
 import '@picocss/pico'
+import '@styles/global.css'
 import { siteConfig } from '@lib/utils/config.ts'
 import Nav from '@components/Site/Nav.astro'
-import '@styles/global.css'
+import Footer from '@components/Site/Footer.astro'
 ---
 
 <html lang='en'>
@@ -14,7 +15,18 @@ import '@styles/global.css'
     <title>{siteConfig.title}</title>
   </head>
   <body>
-    <Nav />
-    <slot />
+    <div class='main'>
+      <Nav />
+      <main>
+        <slot />
+      </main>
+    </div>
+    <Footer />
   </body>
 </html>
+
+<style>
+  .main {
+    position: relative;
+  }
+</style>

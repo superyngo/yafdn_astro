@@ -1,21 +1,12 @@
 ---
-const pageTitle = 'About Me'
+import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <a href='/'>Home</a>
-    <a href='/about'>About</a>
-    <a href='/blog'>Blog</a>
-    <h1>About Me</h1>
-    <h2>... and my new Astro site!</h2>
-    <p>Hi!我是 Wen， 努力學習前端技術，目前使用 vue2/3 及 svelte/sveltekit！</p>
-  </body>
-</html>
+<BaseLayout>
+  <a href='/'>Home</a>
+  <a href='/about'>About</a>
+  <a href='/blog'>Blog</a>
+  <h1>About Me</h1>
+  <h2>... and my new Astro site!</h2>
+  <p>Hi!我是 Wen， 努力學習前端技術，目前使用 vue2/3 及 svelte/sveltekit！</p>
+</BaseLayout>

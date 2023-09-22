@@ -2,29 +2,50 @@
 import Navigation from './Nav/Navigation.svelte'
 import Preference from './Nav/Preference.svelte'
 import SiteLogo from './Nav/SiteLogo.astro'
+import NavScript from './Nav/NavScript.svelte'
 ---
 
-<div class='nav'>
-  <div class='navitemWrapper'>
-    <SiteLogo />
-  </div>
-  <div class='navitemWrapper'>
-    <Navigation />
-  </div>
-  <div class='navitemWrapper'>
-    <Preference client:load />
+<NavScript client:load />
+<div class='Mask'>
+  <div class='nav'>
+    <div class='head'>
+      <div class='navitemWrapper'>
+        <SiteLogo />
+      </div>
+      <div class='navitemWrapper'>
+        <Navigation />
+      </div>
+      <div class='navitemWrapper'>
+        <Preference client:load />
+      </div>
+    </div>
+    <div id='controlPanel-container'></div>
   </div>
 </div>
 
-<style>
+<style scoped>
+  .Mask {
+    position: absolute;
+    inset: 0;
+  }
   .nav {
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    height: fit-content;
+  }
+
+  .head {
+    overflow: hidden;
+    background: var(--background-color);
     border: 1px solid black;
     padding: 0 var(--nav-padding);
     height: var(--nav-height);
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
+
     & .navitemWrapper:first-child {
       margin-right: auto;
     }
@@ -37,7 +58,7 @@ import SiteLogo from './Nav/SiteLogo.astro'
   }
 
   @media (min-width: 768px) {
-    .nav {
+    .head {
       grid-template-columns: repeat(3, 1fr);
       & .navitemWrapper:nth-child(2) {
         display: inline !important;

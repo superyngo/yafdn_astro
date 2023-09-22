@@ -2,4 +2,9 @@
   --nav-padding: 1rem;
   --nav-height: 6rem;
   --aside-width: 2rem;
+  --min-width1: 768px;
+}
+
+.hide {
+  display: none;
 }

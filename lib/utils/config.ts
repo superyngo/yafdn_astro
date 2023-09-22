@@ -20,3 +20,4 @@ export const navItems = [
     name: 'About'
   }
 ]
+export const teleportID = 'teleport-container'
