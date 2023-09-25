@@ -3,11 +3,11 @@
   import { navItems } from '@lib/utils/config'
 </script>
 
-<div class="wrapper">
+<nav class="wrapper">
   {#each navItems as navItem}
     <Navitem href={navItem.href} name={navItem.name} />
   {/each}
-</div>
+</nav>
 
 <style scoped>
   .wrapper {

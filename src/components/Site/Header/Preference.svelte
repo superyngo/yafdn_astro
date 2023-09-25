@@ -3,28 +3,22 @@
   import ControlPanelBtns from './Preference/ControlPanelBtns.svelte'
   import ControlPanel from './Preference/ControlPanel.svelte'
   import MyPopover from '@components/UIs/MyPopover.svelte'
-  import GetWindowsWidth from '@components/Tools/svelte/GetWindowsWidth.svelte'
 
   let popover = { hide: true }
   $: {
     state.popover = popover
   }
-  let windowWidth: number
 </script>
 
-<GetWindowsWidth bind:windowWidth />
-
 <div class="wrapper">
-  {#if windowWidth > 768}
-    <a href="#" class="searchbar">searchbar</a>
-  {/if}
+  <a href="#" class="searchbar">searchbar</a>
 
   <MyPopover bind:popover={state.popover} popoverSelector=".controlPanel">
     <span slot="btnContent">
       <ControlPanelBtns bind:popover={state.popover} />
     </span>
     <div slot="popPanel">
-      <ControlPanel bind:windowWidth bind:hide={popover.hide} />
+      <ControlPanel bind:hide={popover.hide} />
     </div>
   </MyPopover>
 </div>
@@ -35,11 +29,14 @@
     grid-template-columns: repeat(2, auto);
     place-items: center;
     gap: 1rem;
+    & .searchbar {
+      display: none;
+    }
   }
 
   @media (min-width: 768px) {
     .searchbar {
-      display: block;
+      display: block !important;
     }
   }
 </style>

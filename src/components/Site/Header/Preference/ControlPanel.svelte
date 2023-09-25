@@ -1,68 +1,44 @@
 <script lang="ts">
   import Navigation from '../Navigation.svelte'
   import { teleport } from '@lib/utils/svelte/teleport'
-  export let windowWidth: number
+
+  import ThemeToggle from './ControlPanel/ThemeToggle.svelte'
+  import MyRange from './ControlPanel/myRange.svelte'
+  import Gtranslate from './ControlPanel/Gtranslate.svelte'
+
   export let hide = true
 </script>
 
-<svelte:head>
-  <script>
-    window.gtranslateSettings = {
-      default_language: 'zh-TW',
-      native_language_names: true,
-      detect_browser_language: true,
-      languages: ['zh-TW', 'en', 'ja'],
-      wrapper_selector: '.gtranslate_wrapper'
-    }
-  </script>
-  <script
-    src="https://cdn.gtranslate.net/widgets/latest/dropdown.js"
-    defer
-  ></script>
-</svelte:head>
-
 <div class="controlPanel" use:teleport={'controlPanel-container'} class:hide>
-  {#if windowWidth < 768}
+  <div class="navInControlPanel">
     <Navigation />
+  </div>
+  <div class="searchbarWrapper">
     <a href="#" class="searchbar">searchbar</a>
-  {/if}
-  <div class="menuItem">
-    <label for="language"><span>Language</span></label>
-    <div class="gtranslate_wrapper"></div>
-    <!-- <select id="language">
-      <option selected value="">繁體中文</option>
-      <option>English</option>
-      <option>Japanese</option>
-    </select> -->
   </div>
   <div class="menuItem">
-    <label for="theme"><span>Theme</span></label>
-    <select id="theme">
-      <option selected value="">Light</option>
-      <option>Dark</option>
-    </select>
+    <Gtranslate />
   </div>
   <div class="menuItem">
-    <label for="fontSizeRange">Font size : 20px</label>
-    <input
-      type="range"
+    <ThemeToggle />
+  </div>
+  <div class="menuItem">
+    <MyRange
       min="16"
       max="24"
       value="20"
       id="fontSizeRange"
-      name="fontSizeRange"
-    />
+      cssVarName="--font-size"
+    ></MyRange>
   </div>
   <div class="menuItem">
-    <label for="lineHeightRange">Line height : 40px</label>
-    <input
-      type="range"
-      min="32"
+    <MyRange
+      min="24"
       max="48"
-      value="40"
+      value="30"
       id="lineHeightRange"
-      name="lineHeightRange"
-    />
+      cssVarName="--line-height"
+    ></MyRange>
   </div>
   <a href="#" role="button">Set to defalut</a>
 </div>
@@ -92,6 +68,10 @@
       height: auto;
       border: 3px solid var(--color);
       border-radius: 1rem;
+    }
+    .navInControlPanel,
+    .searchbarWrapper {
+      display: none;
     }
   }
 

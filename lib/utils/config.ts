@@ -21,3 +21,11 @@ export const navItems = [
   }
 ]
 export const teleportID = 'teleport-container'
+
+export const gtranslateSettings = {
+  default_language: 'zh-TW',
+  native_language_names: true,
+  detect_browser_language: true,
+  languages: ['zh-TW', 'en', 'ja'],
+  wrapper_selector: '.gtranslate_wrapper'
+}
