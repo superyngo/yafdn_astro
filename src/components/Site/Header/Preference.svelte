@@ -1,24 +1,22 @@
 <script lang="ts">
-  import { state } from '@lib/stores/state'
+  import { hideControlPanel } from '@lib/stores/state'
   import ControlPanelBtns from './Preference/ControlPanelBtns.svelte'
   import ControlPanel from './Preference/ControlPanel.svelte'
   import MyPopover from '@components/UIs/MyPopover.svelte'
-
-  let popover = { hide: true }
-  $: {
-    state.popover = popover
-  }
 </script>
 
 <div class="wrapper">
   <a href="#" class="searchbar">searchbar</a>
 
-  <MyPopover bind:popover={state.popover} popoverSelector=".controlPanel">
+  <MyPopover
+    bind:hidePopover={$hideControlPanel}
+    popoverSelector=".controlPanel"
+  >
     <span slot="btnContent">
-      <ControlPanelBtns bind:popover={state.popover} />
+      <ControlPanelBtns bind:hidePopover={$hideControlPanel} />
     </span>
     <div slot="popPanel">
-      <ControlPanel bind:hide={popover.hide} />
+      <ControlPanel bind:hide={$hideControlPanel} />
     </div>
   </MyPopover>
 </div>

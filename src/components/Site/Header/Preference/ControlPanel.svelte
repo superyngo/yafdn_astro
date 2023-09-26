@@ -1,12 +1,27 @@
 <script lang="ts">
   import Navigation from '../Navigation.svelte'
   import { teleport } from '@lib/utils/svelte/teleport'
-
   import ThemeToggle from './ControlPanel/ThemeToggle.svelte'
   import MyRange from './ControlPanel/myRange.svelte'
   import Gtranslate from './ControlPanel/Gtranslate.svelte'
+  import { isBrowser } from '@lib/utils/utils'
 
   export let hide = true
+  let controlConfig = {
+    fontSize: (isBrowser() && localStorage.fontSize) || '20',
+    lineHeight: (isBrowser() && localStorage.lineHeight) || '30',
+    theme: (isBrowser() && localStorage.theme) || 'dark'
+  }
+
+  const setToDefault = function () {
+    if (window) {
+      controlConfig.fontSize = '20'
+      controlConfig.lineHeight = '30'
+      controlConfig.theme = 'dark'
+      document.querySelector('.gt_selector').value = 'zh-TW|zh-TW'
+      window.doGTranslate('zh-TW|zh-TW')
+    }
+  }
 </script>
 
 <div class="controlPanel" use:teleport={'controlPanel-container'} class:hide>
@@ -20,13 +35,13 @@
     <Gtranslate />
   </div>
   <div class="menuItem">
-    <ThemeToggle />
+    <ThemeToggle bind:theme={controlConfig.theme} />
   </div>
   <div class="menuItem">
     <MyRange
       min="16"
       max="24"
-      value="20"
+      bind:value={controlConfig.fontSize}
       id="fontSizeRange"
       cssVarName="--font-size"
     ></MyRange>
@@ -35,16 +50,17 @@
     <MyRange
       min="24"
       max="48"
-      value="30"
+      bind:value={controlConfig.lineHeight}
       id="lineHeightRange"
       cssVarName="--line-height"
     ></MyRange>
   </div>
-  <a href="#" role="button">Set to defalut</a>
+  <button on:click={setToDefault}>Set to defalut</button>
 </div>
 
 <style>
   .controlPanel {
+    position: static;
     z-index: 10;
     inset: 0;
     padding: var(--nav-padding);
@@ -63,7 +79,8 @@
   @media (min-width: 768px) {
     .controlPanel {
       float: right;
-      inset: 0 var(--aside-width) 0 auto;
+      inset: 0;
+      margin-right: var(--aside-width);
       width: 20rem;
       height: auto;
       border: 3px solid var(--color);

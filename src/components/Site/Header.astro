@@ -2,20 +2,20 @@
 import Navigation from './Header/Navigation.svelte'
 import Preference from './Header/Preference.svelte'
 import SiteLogo from './Header/SiteLogo.astro'
-import NavScript from './Header/NavScript.svelte'
+import HeaderScript from './Header/HeaderScript.svelte'
 ---
 
-<NavScript client:load />
+<HeaderScript client:load />
 <div class='Mask'>
-  <div class='nav'>
-    <div class='head'>
-      <div class='navitemWrapper'>
+  <div class='headerOutline'>
+    <div class='headerWrapper'>
+      <div class='headerItemWrapper'>
         <SiteLogo />
       </div>
-      <div class='navitemWrapper'>
+      <div class='headerItemWrapper'>
         <Navigation />
       </div>
-      <div class='navitemWrapper'>
+      <div class='headerItemWrapper'>
         <Preference client:load />
       </div>
     </div>
@@ -29,16 +29,15 @@ import NavScript from './Header/NavScript.svelte'
     inset: 0;
     pointer-events: none;
   }
-  .nav {
+  .headerOutline {
     width: 100%;
     z-index: 10;
     position: absolute;
     top: 0;
-    height: fit-content;
     pointer-events: auto;
   }
 
-  .head {
+  .headerWrapper {
     overflow: hidden;
     background: var(--background-color);
     border: 1px solid black;
@@ -48,21 +47,21 @@ import NavScript from './Header/NavScript.svelte'
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
 
-    & .navitemWrapper:first-child {
+    & .headerItemWrapper:first-child {
       margin-right: auto;
     }
-    & .navitemWrapper:nth-child(2) {
+    & .headerItemWrapper:nth-child(2) {
       display: none;
     }
-    & .navitemWrapper:nth-child(3) {
+    & .headerItemWrapper:nth-child(3) {
       margin-left: auto;
     }
   }
 
   @media (min-width: 768px) {
-    .head {
+    .headerWrapper {
       grid-template-columns: repeat(3, 1fr);
-      & .navitemWrapper:nth-child(2) {
+      & .headerItemWrapper:nth-child(2) {
         display: inline !important;
         margin: auto;
       }
