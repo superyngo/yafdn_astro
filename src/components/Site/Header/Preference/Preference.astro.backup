@@ -72,7 +72,7 @@
   }
   .full {
     width: 100vw;
-    height: calc(100vh - var(--nav-height));
+    height: calc(100vh - var(--header-height));
     translate: var(--nav-margin);
   }
 </style>

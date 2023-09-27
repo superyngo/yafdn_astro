@@ -4,16 +4,22 @@
   let ScrollTop: number
   let lastScrollTop = 0
   let header: HTMLElement
+  let headerHeight: number
 
   isBrowser() &&
-    (header = <HTMLElement>document.querySelector('.headerOutline'))
+    (header = <HTMLElement>document.querySelector('.headerWrapper')) &&
+    (headerHeight = +getComputedStyle(header)
+      .getPropertyValue('height')
+      .replace('px', ''))
 
   $: {
     if (isBrowser()) {
       if (ScrollTop > lastScrollTop && $hideControlPanel)
-        (<HTMLElement>header).style.position = 'absolute'
+        (<HTMLElement>header).style.height = '0px'
       if (ScrollTop < lastScrollTop)
-        (<HTMLElement>header).style.position = 'sticky'
+        (<HTMLElement>header).style.height = 'var(--header-height)'
+      if (ScrollTop < headerHeight)
+        (<HTMLElement>header).style.height = 'var(--header-height)'
       lastScrollTop = ScrollTop
       $windowsScrollY = ScrollTop
     }

@@ -5,6 +5,7 @@
   import MyRange from './ControlPanel/myRange.svelte'
   import Gtranslate from './ControlPanel/Gtranslate.svelte'
   import { isBrowser } from '@lib/utils/utils'
+  import Searchbar from './ControlPanel/Searchbar.svelte'
 
   export let hide = true
   let controlConfig = {
@@ -29,7 +30,7 @@
     <Navigation />
   </div>
   <div class="searchbarWrapper">
-    <a href="#" class="searchbar">searchbar</a>
+    <Searchbar />
   </div>
   <div class="menuItem">
     <Gtranslate />
@@ -63,10 +64,10 @@
     position: static;
     z-index: 10;
     inset: 0;
-    padding: var(--nav-padding);
+    padding: var(--header-padding);
     display: grid;
     width: 100%;
-    height: calc(100vh - var(--nav-height));
+    height: calc(100vh - var(--header-height));
     background: var(--background-color);
     overflow: auto;
     & .menuItem {

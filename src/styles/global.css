@@ -1,10 +1,14 @@
 :root {
-  --nav-padding: 1rem;
-  --nav-height: 6rem;
+  --header-padding: 1rem;
+  --header-height: 5rem;
   --aside-width: 2rem;
   --min-width1: 768px;
 }
 
 .hide {
   display: none;
+}
+
+html {
+  scrollbar-gutter: stable;
 }

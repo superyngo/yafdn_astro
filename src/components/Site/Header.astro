@@ -32,7 +32,7 @@ import HeaderScript from './Header/HeaderScript.svelte'
   .headerOutline {
     width: 100%;
     z-index: 10;
-    position: absolute;
+    position: sticky;
     top: 0;
     pointer-events: auto;
   }
@@ -40,13 +40,13 @@ import HeaderScript from './Header/HeaderScript.svelte'
   .headerWrapper {
     overflow: hidden;
     background: var(--background-color);
-    border: 1px solid black;
-    padding: 0 var(--nav-padding);
-    height: var(--nav-height);
+    /* border: 1px solid black; */
+    padding: 0 var(--header-padding);
+    height: var(--header-height);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
-
+    transition: height ease 200ms;
     & .headerItemWrapper:first-child {
       margin-right: auto;
     }

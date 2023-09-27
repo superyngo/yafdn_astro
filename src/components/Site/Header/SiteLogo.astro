@@ -18,6 +18,7 @@ import { siteConfig } from '@lib/utils/config.ts'
     }
     & .siteTitle {
       font-size: 1.5rem;
+      white-space: nowrap;
     }
   }
 
@@ -26,6 +27,11 @@ import { siteConfig } from '@lib/utils/config.ts'
       & .logo {
         font-size: 4rem;
       }
+    }
+  }
+
+  @media (min-width: 960px) {
+    .siteTitleWrapper {
       & .siteTitle {
         font-size: 2rem;
       }
