@@ -1,5 +1,15 @@
-export function teleport(node, name = 'teleport-container') {
-  let teleportContainer = document.getElementById(name)
-  teleportContainer?.replaceWith(node)
+export function teleport(
+  node,
+  { selector = '#teleport-container', method = 'append' }
+) {
+  let teleportContainer = document.querySelector(selector)
+  switch (method) {
+    case 'replace':
+      teleportContainer?.replaceWith(node)
+      break
+    case 'append':
+      teleportContainer?.append(node)
+      break
+  }
   // teleportContainer.focus() // optional
 }

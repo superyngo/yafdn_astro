@@ -6,27 +6,38 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:md": "ts-node .scripts/md/pre/index.ts",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
   },
   "dependencies": {
+    "@astrojs/mdx": "^1.1.0",
     "@astrojs/netlify": "^3.0.1",
     "@astrojs/svelte": "^4.0.2",
     "@picocss/pico": "^1.5.10",
     "astro": "^3.1.0"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.3",
     "@typescript-eslint/parser": "^6.7.2",
+    "chalk": "^5.3.0",
+    "dompurify": "^3.0.5",
+    "dotenv": "^16.3.1",
+    "dotenv-expand": "^10.0.0",
     "eslint": "^8.49.0",
     "eslint-plugin-astro": "^0.29.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-svelte": "^2.33.2",
+    "node-fetch": "^3.3.2",
     "prettier": "^3.0.3",
     "prettier-config-standard": "^7.0.0",
     "prettier-plugin-astro": "^0.12.0",
     "prettier-plugin-svelte": "^3.0.3",
-    "svelte": "^4.2.0"
+    "svelte": "^4.2.0",
+    "typescript": "^5.2.2",
+    "url": "^0.11.3",
+    "yaml": "^2.3.2"
   }
 }

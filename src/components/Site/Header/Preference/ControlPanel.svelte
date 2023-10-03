@@ -5,7 +5,7 @@
   import MyRange from './ControlPanel/myRange.svelte'
   import Gtranslate from './ControlPanel/Gtranslate.svelte'
   import { isBrowser } from '@lib/utils/utils'
-  import Searchbar from './ControlPanel/Searchbar.svelte'
+  import Searchbar from './Searchbar.svelte'
 
   export let hide = true
   let controlConfig = {
@@ -25,13 +25,15 @@
   }
 </script>
 
-<div class="controlPanel" use:teleport={'controlPanel-container'} class:hide>
+<div
+  class="controlPanel"
+  use:teleport={{ selector: '#controlPanel-container', method: 'replace' }}
+  class:hide
+>
   <div class="navInControlPanel">
     <Navigation />
   </div>
-  <div class="searchbarWrapper">
-    <Searchbar />
-  </div>
+  <div class="searchbarInControlPanel"><Searchbar /></div>
   <div class="menuItem">
     <Gtranslate />
   </div>
@@ -88,7 +90,7 @@
       border-radius: 1rem;
     }
     .navInControlPanel,
-    .searchbarWrapper {
+    .searchbarInControlPanel {
       display: none;
     }
   }

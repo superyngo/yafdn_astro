@@ -3,13 +3,11 @@
   import ControlPanelBtns from './Preference/ControlPanelBtns.svelte'
   import ControlPanel from './Preference/ControlPanel.svelte'
   import MyPopover from '@components/UIs/MyPopover.svelte'
-  import Searchbar from './Preference/ControlPanel/Searchbar.svelte'
+  import Searchbar from './Preference/Searchbar.svelte'
 </script>
 
 <div class="wrapper container">
-  <div class="searchbar">
-    <Searchbar />
-  </div>
+  <div class="searchbarInPreference"><Searchbar /></div>
 
   <MyPopover
     bind:hidePopover={$hideControlPanel}
@@ -30,7 +28,7 @@
     place-items: center;
     grid-template-columns: auto auto;
     gap: 1rem;
-    & .searchbar {
+    & .searchbarInPreference {
       display: none;
     }
     & button {
@@ -39,7 +37,7 @@
   }
 
   @media (min-width: 768px) {
-    .searchbar {
+    .searchbarInPreference {
       display: block !important;
     }
   }

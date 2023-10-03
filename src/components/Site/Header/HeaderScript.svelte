@@ -1,29 +1,31 @@
 <script lang="ts">
   import { isBrowser } from '@lib/utils/utils'
-  import { hideControlPanel, windowsScrollY } from '@lib/stores/state'
-  let ScrollTop: number
+  import {
+    hideControlPanel,
+    windowsScrollY,
+    windowsWidth
+  } from '@lib/stores/state'
   let lastScrollTop = 0
-  let header: HTMLElement
-  let headerHeight: number
+  let header: HTMLElement, headerHeight: number
 
-  isBrowser() &&
-    (header = <HTMLElement>document.querySelector('.headerWrapper')) &&
-    (headerHeight = +getComputedStyle(header)
+  if (isBrowser()) {
+    header = <HTMLElement>document.querySelector('.headerWrapper')
+    headerHeight = +getComputedStyle(header)
       .getPropertyValue('height')
-      .replace('px', ''))
+      .replace('px', '')
+  }
 
   $: {
     if (isBrowser()) {
-      if (ScrollTop > lastScrollTop && $hideControlPanel)
+      if ($windowsScrollY > lastScrollTop && $hideControlPanel)
         (<HTMLElement>header).style.height = '0px'
-      if (ScrollTop < lastScrollTop)
+      if ($windowsScrollY < lastScrollTop)
         (<HTMLElement>header).style.height = 'var(--header-height)'
-      if (ScrollTop < headerHeight)
+      if ($windowsScrollY < headerHeight)
         (<HTMLElement>header).style.height = 'var(--header-height)'
-      lastScrollTop = ScrollTop
-      $windowsScrollY = ScrollTop
+      lastScrollTop = $windowsScrollY
     }
   }
 </script>
 
-<svelte:window bind:scrollY={ScrollTop} />
+<svelte:window bind:scrollY={$windowsScrollY} bind:innerWidth={$windowsWidth} />

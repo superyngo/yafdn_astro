@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import postLists from '@contents/lists/postsMetaList.json'
+---
+
+<BaseLayout>
+  <h1>My Astro Learning Blog</h1>
+  <p>This is where I will post about my journey learning Astro.</p>
+  <ul>
+    {
+      postLists.map((post) => (
+        <li>
+          <a href={`/blog/blogMD/${post.number}/`}>
+            {post.title}
+            {`  `} {post.publishedAt}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

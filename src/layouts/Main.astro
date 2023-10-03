@@ -1,8 +1,10 @@
 <div class='headerEmpty'></div>
 
-<main>
-  <slot />
-</main>
+<div class='container'>
+  <main>
+    <slot />
+  </main>
+</div>
 
 <style>
   .headerEmpty {
@@ -10,5 +12,6 @@
   }
   main {
     margin: var(--aside-width);
+    max-width: clamp(640px, 100vw, 1280px);
   }
 </style>
