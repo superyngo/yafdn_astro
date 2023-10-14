@@ -36,12 +36,7 @@
 </aside>
 
 <style scoped>
-  aside {
-  }
   form {
     padding: 30px 0 0 0;
-  }
-  #searchbar {
-    margin: 0;
   }
 </style>
