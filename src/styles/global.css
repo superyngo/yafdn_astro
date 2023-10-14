@@ -1,7 +1,7 @@
 :root {
   --header-padding: 1rem;
   --header-height: 6rem;
-  --aside-width: 2rem;
+  --aside-width: 400px;
   --min-width1: 768px;
 }
 
@@ -9,6 +9,8 @@
   display: none;
 }
 
-html {
+html,
+body {
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
 }

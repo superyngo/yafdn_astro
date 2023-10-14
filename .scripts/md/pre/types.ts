@@ -52,9 +52,9 @@ export interface DiscussionsType {
         }[]
   }
   body?: string
-  year?: number
-  month?: number
-  date?: number
+  year?: string
+  month?: string
+  date?: string
   layout?: string
 }
 

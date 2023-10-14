@@ -1,5 +1,6 @@
-<div class='headerEmpty'></div>
+<div id='screen'></div>
 
+<div class='headerEmpty'></div>
 <div class='container'>
   <main>
     <slot />
@@ -11,7 +12,7 @@
     height: var(--header-height);
   }
   main {
-    margin: var(--aside-width);
+    /* translate: -500px 50px; */
     max-width: clamp(640px, 100vw, 1280px);
   }
 </style>

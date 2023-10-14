@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import Searchbar from '@components/Site/Header/Preference/Searchbar.svelte'
+  import Searchbar from '@/components/Site/Header/Preference/Searchbar.svelte'
 
   let value: string
   let clean: string

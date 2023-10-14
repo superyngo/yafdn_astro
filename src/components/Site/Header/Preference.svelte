@@ -2,7 +2,7 @@
   import { hideControlPanel } from '@lib/stores/state'
   import ControlPanelBtns from './Preference/ControlPanelBtns.svelte'
   import ControlPanel from './Preference/ControlPanel.svelte'
-  import MyPopover from '@components/UIs/MyPopover.svelte'
+  import MyPopover from '@/components/UIs/MyPopover.svelte'
   import Searchbar from './Preference/Searchbar.svelte'
 </script>
 

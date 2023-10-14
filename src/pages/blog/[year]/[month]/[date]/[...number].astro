@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
+import TableOfContents from '@/components/Pages/blog/TableOfContents.svelte'
+import BlogPost from '@/components/Pages/blog/BlogPost.astro'
+
+// dynamic route for SSR
+// import { getEntry } from 'astro:content'
+// const { number } = Astro.params
+// const entry = await getEntry('blogMD', number)
+
+//static route for SSG
+export async function getStaticPaths() {
+  const posts = await getCollection('blogMD')
+  return posts.map((post) => ({
+    params: {
+      year: post.data.year,
+      month: post.data.month,
+      date: post.data.date,
+      number: post.data.number
+    },
+    props: post
+  }))
+}
+type Props = CollectionEntry<'blogMD'>
+const post = Astro.props
+const { Content, headings } = await post.render()
+---
+
+<BaseLayout>
+  <!-- <BlogPost /> -->
+  <!-- <h1>{post.data.title}</h1>
+  <h6>Published:{post.data.publishedAt}</h6>
+  <p>{post.data.description}</p> -->
+  <article>
+    <Content />
+  </article>
+</BaseLayout>
+
+<TableOfContents client:load {headings} />
+<style></style>

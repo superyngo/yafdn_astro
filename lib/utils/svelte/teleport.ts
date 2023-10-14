@@ -1,5 +1,5 @@
 export function teleport(
-  node,
+  node: HTMLElement,
   { selector = '#teleport-container', method = 'append' }
 ) {
   let teleportContainer = document.querySelector(selector)

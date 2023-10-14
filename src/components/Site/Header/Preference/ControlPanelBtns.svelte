@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Xsvg from '@assets/X.svelte'
-  import Hamburgsvg from '@assets/hamburg.svelte'
+  import Xsvg from '@/assets/X.svelte'
+  import Hamburgsvg from '@/assets/hamburg.svelte'
   export let hidePopover
 </script>
 

@@ -1,0 +1,70 @@
+---
+interface Props {
+  headings: Array<{
+    depth: number
+    slug: string
+    text: string
+  }>
+}
+const { headings } = Astro.props
+// headings.reduce()
+let level = [0, 0]
+---
+
+{
+  !!headings.length && (
+    <ul data-blog-toc class=''>
+      <li class=''>TOC</li>
+      {headings.map(({ depth, slug, text }) => {
+        if (depth > 2) return
+        level[depth - 1]++
+        return (
+          <li>
+            <a
+              class={`depth${depth}`}
+              href={`#${slug}`}
+              aria-label={`Scroll to section: ${text}`}
+              style={`margin-left: calc(${depth} * 1rem);`}
+            >
+              {text}
+            </a>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+<style scoped>
+  li {
+    list-style: none;
+  }
+</style>
+
+<script>
+  const setCurrent: IntersectionObserverCallback = (entries) => {
+    for (let entry of entries) {
+      const { id } = entry.target
+      const tocHeadingEl = document.querySelector(
+        `[data-blog-toc] a[href="#${id}"]`
+      )
+      if (!tocHeadingEl) return
+      if (entry.isIntersecting) {
+        document
+          .querySelectorAll('[data-blog-toc] a')
+          .forEach((e) => e.classList.remove('active'))
+        tocHeadingEl.classList.add('active')
+      }
+    }
+  }
+
+  const observerOption: IntersectionObserverInit = {
+    root: null,
+    rootMargin: '0px 0px -180px',
+    threshold: 1.0
+  }
+  const headingObserver = new IntersectionObserver(setCurrent, observerOption)
+  document
+    .querySelectorAll('article :is(h2,h3,h4)')
+    .forEach((heading) => headingObserver.observe(heading))
+</script>

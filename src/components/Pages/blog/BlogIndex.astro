@@ -1,0 +1,30 @@
+---
+interface Props {
+  posts: {
+    year: string
+    month: string
+    date: string
+    number: string
+    title: string
+    publishedAt: string
+  }[]
+}
+const { posts } = Astro.props
+---
+
+<h1>My Astro Learning Blog</h1>
+<p>This is where I will post about my journey learning Astro.</p>
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <a
+          href={`/blog/${post.year}/${post.month}/${post.date}/${post.number}/`}
+        >
+          {post.title}
+          {`  `} {post.publishedAt}
+        </a>
+      </li>
+    ))
+  }
+</ul>

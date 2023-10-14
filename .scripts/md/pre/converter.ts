@@ -3,8 +3,10 @@ import config from '../lib/config.js'
 import YAML from 'yaml'
 import type { DiscussionsType, FilteredDiscussionObject } from './types'
 
-const { CONFIG_CATEGORY, POST_CATEGORY, PAGE_CATEGORY, BASE_LAYOUTS_PATH } =
-  config
+const { CONFIG_CATEGORY, POST_CATEGORY, PAGE_CATEGORY, APPEND_FRONTMATTER } = {
+  APPEND_FRONTMATTER: null,
+  ...config
+}
 
 const splitMdx = (mdx: string) => {
   const arr = mdx.split(/^(?:-{3}[\n\r]([\w\W]+?)[\n\r]-{3})/)
@@ -45,10 +47,15 @@ const splitMdx = (mdx: string) => {
 
 const addPostFrontMatter = (post: DiscussionsType) => {
   const date = new Date(post.publishedAt)
-  post.year = date.getFullYear()
-  post.month = date.getMonth() + 1
-  post.date = date.getDate()
-  post.layout = BASE_LAYOUTS_PATH
+  post.year = date.getFullYear().toString()
+  post.month = (date.getMonth() + 1).toString()
+  post.date = date.getDate().toString()
+  if (APPEND_FRONTMATTER) {
+    const frontmatters = Object.keys(APPEND_FRONTMATTER)
+    frontmatters.forEach((frontmatter) => {
+      post[frontmatter] = APPEND_FRONTMATTER[frontmatter]
+    })
+  }
   return post
 }
 

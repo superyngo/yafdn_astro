@@ -1,10 +1,10 @@
 ---
 import '@picocss/pico'
-import '@styles/global.css'
+import '@/styles/global.css'
 import { siteConfig } from '@lib/utils/config.ts'
-import Header from '@components/Site/Header.astro'
-import Footer from '@components/Site/Footer.astro'
-import Main from '@layouts/Main.astro'
+import Header from '@/components/Site/Header.astro'
+import Footer from '@/components/Site/Footer.astro'
+import Main from '@/components/Site/Main.astro'
 const { title } = Astro.props
 ---
 
@@ -28,8 +28,8 @@ const { title } = Astro.props
         <slot />
       </Main>
     </div>
+
     <Footer />
-    <style></style>
   </body>
 </html>
 

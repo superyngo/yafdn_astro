@@ -1,5 +1,5 @@
 <script>
-  import Navitem from '@components/UIs/LinkItems.svelte'
+  import Navitem from '@/components/UIs/LinkItems.svelte'
   import { navItems } from '@lib/utils/config'
 </script>
 
