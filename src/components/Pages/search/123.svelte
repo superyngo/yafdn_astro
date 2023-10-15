@@ -17,4 +17,3 @@
 
 <Searchbar tag="div" bind:value bind:clean bind:ref />
 <span>{clean ? `Search results for "${clean}"` : ''}</span>
-test
