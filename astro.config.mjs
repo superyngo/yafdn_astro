@@ -11,13 +11,13 @@ import mdx from '@astrojs/mdx'
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src')
-      }
-    }
-  },
+  // vite: {
+  //   resolve: {
+  //     alias: {
+  //       '@': path.resolve(__dirname, './src')
+  //     }
+  //   }
+  // },
   markdown: {
     // Applied to .md and .mdx files
     // remarkPlugins: [[remarkToc, { ordered: true, tight: false }]]
