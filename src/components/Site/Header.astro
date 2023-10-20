@@ -6,7 +6,7 @@ import HeaderScript from './Header/HeaderScript.svelte'
 ---
 
 <HeaderScript client:load />
-<div class='Mask'>
+<div class='Mask' id='MaskOfHeader'>
   <div class='headerOutline'>
     <div class='headerWrapper'>
       <div class='headerItemWrapper'>
@@ -24,11 +24,6 @@ import HeaderScript from './Header/HeaderScript.svelte'
 </div>
 
 <style scoped>
-  .Mask {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
   .headerOutline {
     width: 100%;
     z-index: 10;
@@ -40,7 +35,6 @@ import HeaderScript from './Header/HeaderScript.svelte'
   .headerWrapper {
     overflow: hidden;
     background: var(--background-color);
-    /* border: 1px solid black; */
     padding: 0 var(--header-padding);
     height: var(--header-height);
     display: grid;

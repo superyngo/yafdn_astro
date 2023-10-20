@@ -1,7 +1,6 @@
-<div id='screen'></div>
-
 <div class='headerEmpty'></div>
 <div class='container'>
+  <div class='Mask' id='MaskOfMain'></div>
   <main>
     <slot />
   </main>
@@ -11,8 +10,14 @@
   .headerEmpty {
     height: var(--header-height);
   }
+  .Mask {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
   main {
-    /* translate: -500px 50px; */
+    margin-top: calc(var(--header-padding) * 5);
     max-width: clamp(640px, 100vw, 1280px);
   }
 </style>

@@ -10,6 +10,9 @@ export function teleport(
     case 'append':
       teleportContainer?.append(node)
       break
+    case 'insertFirst':
+      teleportContainer?.insertBefore(node, teleportContainer.firstChild)
+      break
   }
   // teleportContainer.focus() // optional
 }

@@ -2,21 +2,62 @@
   import { teleport } from 'lib/utils/svelte/teleport'
   import type { MarkdownHeading } from 'astro'
 
-  import ToCTable from './TableOfContents/ToCTable.svelte'
-  import { groupList } from '@lib/utils/utils'
+  import LeftArrow from '@/assets/leftArrow.svelte'
+
+  import ToCTable from './ToC/ToCTable.svelte'
+  import { groupList, isBrowser } from '@lib/utils/utils'
   type HeadingWithSubheadings = MarkdownHeading & {
     subheadings: MarkdownHeading[]
   }
-
   export let headings: MarkdownHeading[]
+  import { ToCToggleHandler, headerToggleHandler } from '@lib/stores/state'
+
+  let ToCToggleButtonSvg: SVGAnimateElement
   const groupedHeadings = groupList(headings) as HeadingWithSubheadings[]
+
+  isBrowser() && document.addEventListener('click', handleClick, true)
+  let ToCBox
+
+  function toggleToC() {
+    $ToCToggleHandler && ($headerToggleHandler = false)
+    $ToCToggleHandler = !$ToCToggleHandler
+    document.documentElement.style.setProperty(
+      '--aside-width',
+      $ToCToggleHandler ? '400px' : '0px'
+    )
+    ToCToggleButtonSvg.style.setProperty(
+      '--rotateDegree',
+      $ToCToggleHandler ? '540deg' : '0deg'
+    )
+  }
+
+  function handleClick(e: MouseEvent) {
+    e.target.id != 'ToCButton' && $ToCToggleHandler && toggleToC()
+  }
+
+  $: {
+  }
 </script>
 
-<aside class="ToCBox" use:teleport={{ selector: '#screen', method: 'replace' }}>
-  <!-- <div id="table-of-contents" aria-label="Table Of Contents"> -->
-  <p>Table of Contents</p>
-  <ToCTable {groupedHeadings} />
-  <!-- </div> -->
+<aside
+  id="ToCBox"
+  aria-label="Table Of Contents"
+  use:teleport={{ selector: '#MaskOfMain', method: 'append' }}
+  bind:this={ToCBox}
+>
+  {#if $ToCToggleHandler}
+    <p>Table of Contents</p>
+    <ToCTable {groupedHeadings} />
+  {/if}
+</aside>
+
+<aside
+  id="ToCButtonBox"
+  use:teleport={{ selector: '#MaskOfMain', method: 'append' }}
+>
+  <button id="ToCButton" class="svgButton" on:click={() => toggleToC()}
+    ><LeftArrow bind:thisElement={ToCToggleButtonSvg} /></button
+  >
 </aside>
 
 <!-- 
@@ -80,17 +121,37 @@
   }
 </script> -->
 <style scoped>
-  .ToCBox {
+  aside {
     position: sticky;
     float: right;
     top: var(--header-height);
-    width: var(--aside-width);
     height: calc(100vh - var(--header-height));
-    border: 5px solid green;
-    padding: var(--header-padding) var(--header-padding) var(--header-padding) 0;
     overflow-x: hidden;
     overflow-y: auto;
+    pointer-events: auto;
+    transition: width ease 200ms;
+
+    &#ToCBox {
+      width: var(--aside-width);
+      /* padding: var(--header-padding) var(--header-padding) var(--header-padding)
+        0; */
+      backdrop-filter: blur(5px) brightness(1);
+    }
+    &#ToCButtonBox {
+      display: grid;
+      place-items: center;
+    }
+    & p {
+      text-align: center;
+    }
+    & button {
+      /* translate: 100px; */
+      width: 30px;
+      aspect-ratio: 1/1;
+      padding: 0;
+    }
   }
+
   /* .active-toc-item {
     font-weight: bold;
   }

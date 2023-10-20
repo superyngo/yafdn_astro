@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import ToC from './ToC.svelte'
+import { windowsScrollY, ArticleBox } from '@lib/stores/state'
+const { post } = Astro.props
+const { Content, headings } = await post.render()
+---
+
+<BaseLayout>
+  <h1>{post.data.title}</h1>
+  <h6>Published:{post.data.publishedAt}</h6>
+  <p>{post.data.description}</p>
+  <article>
+    <Content />
+  </article>
+  <ToC client:load {headings} />
+</BaseLayout>

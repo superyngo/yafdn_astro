@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hideControlPanel } from '@lib/stores/state'
+  import { ControlPanelToggleHandler } from '@lib/stores/state'
   import ControlPanelBtns from './Preference/ControlPanelBtns.svelte'
   import ControlPanel from './Preference/ControlPanel.svelte'
   import MyPopover from '@/components/UIs/MyPopover.svelte'
@@ -10,14 +10,14 @@
   <div class="searchbarInPreference"><Searchbar /></div>
 
   <MyPopover
-    bind:hidePopover={$hideControlPanel}
+    bind:showPopover={$ControlPanelToggleHandler}
     popoverSelector=".controlPanel"
   >
     <span slot="btnContent">
-      <ControlPanelBtns bind:hidePopover={$hideControlPanel} />
+      <ControlPanelBtns bind:showPopover={$ControlPanelToggleHandler} />
     </span>
     <div slot="popPanel">
-      <ControlPanel bind:hide={$hideControlPanel} />
+      <ControlPanel bind:show={$ControlPanelToggleHandler} />
     </div>
   </MyPopover>
 </div>

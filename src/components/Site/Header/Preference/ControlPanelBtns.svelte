@@ -1,11 +1,11 @@
 <script lang="ts">
   import Xsvg from '@/assets/X.svelte'
   import Hamburgsvg from '@/assets/hamburg.svelte'
-  export let hidePopover
+  export let showPopover: boolean
 </script>
 
-{#if hidePopover}
-  <Hamburgsvg />
-{:else}
+{#if showPopover}
   <Xsvg />
+{:else}
+  <Hamburgsvg />
 {/if}

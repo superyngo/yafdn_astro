@@ -1,7 +1,7 @@
 :root {
   --header-padding: 1rem;
   --header-height: 6rem;
-  --aside-width: 400px;
+  --aside-width: 0px;
   --min-width1: 768px;
 }
 
@@ -13,4 +13,14 @@ html,
 body {
   scrollbar-gutter: stable;
   scroll-behavior: smooth;
+}
+
+.Mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.svgButton * {
+  pointer-events: none;
 }

@@ -1,8 +1,6 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
-import TableOfContents from '@/components/Pages/blog/TableOfContents.svelte'
-import BlogPost from '@/components/Pages/blog/BlogPost.astro.backup'
+import BlogPost from '@/components/Pages/blog/BlogPost.astro'
 
 // dynamic route for SSR
 // import { getEntry } from 'astro:content'
@@ -24,18 +22,6 @@ export async function getStaticPaths() {
 }
 type Props = CollectionEntry<'blogMD'>
 const post = Astro.props
-const { Content, headings } = await post.render()
 ---
 
-<BaseLayout>
-  <!-- <BlogPost /> -->
-  <!-- <h1>{post.data.title}</h1>
-  <h6>Published:{post.data.publishedAt}</h6>
-  <p>{post.data.description}</p> -->
-  <article>
-    <Content />
-  </article>
-</BaseLayout>
-
-<TableOfContents client:load {headings} />
-<style></style>
+<BlogPost {post} />
