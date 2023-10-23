@@ -6,14 +6,14 @@
   import Searchbar from './Preference/Searchbar.svelte'
 </script>
 
-<div class="wrapper container">
+<div class="preferenceWrapper container">
   <div class="searchbarInPreference"><Searchbar /></div>
 
   <MyPopover
     bind:showPopover={$ControlPanelToggleHandler}
     popoverSelector=".controlPanel"
   >
-    <span slot="btnContent">
+    <span slot="btnContent" class="ControlPanelBtns">
       <ControlPanelBtns bind:showPopover={$ControlPanelToggleHandler} />
     </span>
     <div slot="popPanel">
@@ -23,7 +23,7 @@
 </div>
 
 <style scoped>
-  .wrapper {
+  .preferenceWrapper {
     display: grid;
     place-items: center;
     grid-template-columns: auto auto;

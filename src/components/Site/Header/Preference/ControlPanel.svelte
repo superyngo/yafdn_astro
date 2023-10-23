@@ -1,6 +1,6 @@
 <script lang="ts">
   import Navigation from '../Navigation.svelte'
-  import { teleport } from '@lib/utils/svelte/teleport'
+  import { teleport } from '@lib/utils/svelte/svelteUtils'
   import ThemeToggle from './ControlPanel/ThemeToggle.svelte'
   import MyRange from './ControlPanel/myRange.svelte'
   import Gtranslate from './ControlPanel/Gtranslate.svelte'
@@ -84,7 +84,7 @@
       float: right;
       inset: 0;
       /* margin-right: var(--aside-width); */
-      width: 20rem;
+      width: var(--aside-width-default);
       height: auto;
       border: 3px solid var(--color);
       border-radius: 1rem;

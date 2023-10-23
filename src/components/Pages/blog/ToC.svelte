@@ -1,29 +1,41 @@
 <script lang="ts">
-  import { teleport } from 'lib/utils/svelte/teleport'
+  import { onMount } from 'svelte'
+  import {
+    teleport,
+    ToCHighlighting,
+    teleportAndToCHighlighting
+  } from '@lib/utils/svelte/svelteUtils'
   import type { MarkdownHeading } from 'astro'
 
   import LeftArrow from '@/assets/leftArrow.svelte'
 
   import ToCTable from './ToC/ToCTable.svelte'
-  import { groupList, isBrowser } from '@lib/utils/utils'
+  import { groupList } from '@lib/utils/utils'
   type HeadingWithSubheadings = MarkdownHeading & {
     subheadings: MarkdownHeading[]
   }
   export let headings: MarkdownHeading[]
-  import { ToCToggleHandler, headerToggleHandler } from '@lib/stores/state'
+  import {
+    ToCToggleHandler,
+    ArticleBox,
+    windowsScrollY,
+    headerHeight,
+    ToCBox,
+    headerToggleHandler
+  } from '@lib/stores/state'
 
   let ToCToggleButtonSvg: SVGAnimateElement
   const groupedHeadings = groupList(headings) as HeadingWithSubheadings[]
 
-  isBrowser() && document.addEventListener('click', handleClick, true)
-  let ToCBox
-
+  onMount(async () => {
+    document.addEventListener('click', handleClick, true)
+  })
   function toggleToC() {
-    $ToCToggleHandler && ($headerToggleHandler = false)
-    $ToCToggleHandler = !$ToCToggleHandler
+    $windowsScrollY > $headerHeight &&
+      ($headerToggleHandler = $ToCToggleHandler)
     document.documentElement.style.setProperty(
       '--aside-width',
-      $ToCToggleHandler ? '400px' : '0px'
+      $ToCToggleHandler ? 'var(--aside-width-default)' : '0px'
     )
     ToCToggleButtonSvg.style.setProperty(
       '--rotateDegree',
@@ -32,31 +44,64 @@
   }
 
   function handleClick(e: MouseEvent) {
-    e.target.id != 'ToCButton' && $ToCToggleHandler && toggleToC()
+    if (
+      !(<HTMLElement>e.target).closest('#ToCBox') &&
+      !(<HTMLElement>e.target).closest('#ToCButtonBox') &&
+      !(<HTMLElement>e.target).closest('.myPopover') &&
+      !(<HTMLElement>e.target).closest('.controlPanel') &&
+      $ToCToggleHandler
+    ) {
+      $ToCToggleHandler = !$ToCToggleHandler
+    }
   }
 
+  let scrollToY: number
   $: {
+    if ($ArticleBox && $ToCBox) {
+      $ToCToggleHandler, toggleToC()
+    }
+  }
+  $: {
+    // if ($ArticleBox && $ToCBox) {
+    //   scrollToY =
+    //     (($windowsScrollY - $ArticleBox.offsetTop) / $ArticleBox.scrollHeight) *
+    //     $ToCBox.scrollHeight
+    //   // setTimeout(() => {
+    //   //   $ToCBox.scroll({ top: scrollToY, behave: 'smooth' })
+    //   // }, 300)
+    //   // console.log($ToCBox.scrollTop, scrollToY)
+    //   $ArticleBox.querySelectorAll('[id]')
+    //   // .forEach((heading) => console.log(heading))
+    // }
   }
 </script>
 
 <aside
   id="ToCBox"
   aria-label="Table Of Contents"
-  use:teleport={{ selector: '#MaskOfMain', method: 'append' }}
-  bind:this={ToCBox}
+  use:teleportAndToCHighlighting={{
+    selector: '#MaskOfMain',
+    method: 'append',
+    articleSelector: 'article'
+  }}
+  bind:this={$ToCBox}
 >
-  {#if $ToCToggleHandler}
-    <p>Table of Contents</p>
-    <ToCTable {groupedHeadings} />
-  {/if}
+  <!-- {#if $ToCToggleHandler} -->
+  <p>Table of Contents</p>
+  <ToCTable {groupedHeadings} />
+  <!-- {/if} -->
 </aside>
 
 <aside
   id="ToCButtonBox"
   use:teleport={{ selector: '#MaskOfMain', method: 'append' }}
 >
-  <button id="ToCButton" class="svgButton" on:click={() => toggleToC()}
-    ><LeftArrow bind:thisElement={ToCToggleButtonSvg} /></button
+  <button
+    id="ToCButton"
+    class="svgButton"
+    on:click={() => {
+      $ToCToggleHandler = !$ToCToggleHandler
+    }}><LeftArrow bind:thisElement={ToCToggleButtonSvg} /></button
   >
 </aside>
 
@@ -109,7 +154,12 @@
         }
       }
     },
-    { root: null, rootMargin: '0px', threshold: [1] }
+    { root: null, rootMargin: '0px', threshold: [1]
+  
+  
+  
+  
+  }
   )
 
   const sectionHeadings = document.querySelectorAll(
@@ -120,7 +170,7 @@
     observer.observe(heading)
   }
 </script> -->
-<style scoped>
+<style>
   aside {
     position: sticky;
     float: right;
@@ -152,18 +202,8 @@
     }
   }
 
-  /* .active-toc-item {
+  :global(.active-toc-item) {
     font-weight: bold;
+    background: red;
   }
-  nav {
-    position: absolute;
-    right: 0;
-    display: flex;
-    background: var(--background-color);
-    inset: 0;
-    border: 5px solid red;
-    & * {
-      padding: 0;
-    }
-  } */
 </style>

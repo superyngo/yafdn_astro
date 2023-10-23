@@ -2,7 +2,11 @@
   --header-padding: 1rem;
   --header-height: 6rem;
   --aside-width: 0px;
+  --aside-width-default: 20rem;
   --min-width1: 768px;
+}
+* {
+  scroll-margin-top: var(--header-height);
 }
 
 .hide {

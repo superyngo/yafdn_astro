@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
 import { type CollectionEntry, getCollection } from 'astro:content'
 import BlogPost from '@/components/Pages/blog/BlogPost.astro'
 
@@ -24,4 +26,6 @@ type Props = CollectionEntry<'blogMD'>
 const post = Astro.props
 ---
 
-<BlogPost {post} />
+<BaseLayout>
+  <BlogPost {post} />
+</BaseLayout>
