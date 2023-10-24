@@ -1,10 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import {
-    teleport,
-    ToCHighlighting,
-    teleportAndToCHighlighting
-  } from '@lib/utils/svelte/svelteUtils'
+  import { teleport } from '@lib/utils/svelte/svelteUtils'
   import type { MarkdownHeading } from 'astro'
 
   import LeftArrow from '@/assets/leftArrow.svelte'
@@ -79,10 +75,9 @@
 <aside
   id="ToCBox"
   aria-label="Table Of Contents"
-  use:teleportAndToCHighlighting={{
+  use:teleport={{
     selector: '#MaskOfMain',
-    method: 'append',
-    articleSelector: 'article'
+    method: 'append'
   }}
   bind:this={$ToCBox}
 >
@@ -105,71 +100,6 @@
   >
 </aside>
 
-<!-- 
-<nav id='table-of-contents' aria-label='Table Of Contents'>
-  <ol>
-    {
-      grouppedHeadings.map((h) => (
-        <li>
-          <a href={`#${h.slug}`}>{h.text}</a>
-          {h.subheadings?.length > 0 && (
-            <ol>
-              {h.subheadings.map((sub) => (
-                <li>
-                  <a href={`#${sub.slug}`}>{sub.text}</a>
-                </li>
-              ))}
-            </ol>
-          )}
-        </li>
-      ))
-    }
-  </ol>
-</nav> -->
-<!-- <script is:inline>
-  // This script tag is useful only if you want to display the TOC alongside the blog post...
-  // ... and highlight the section that the user is currently reading through.
-  // Feel free to remove this tag if you don't need this type of functionality.
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        const headingFragment = `#${entry.target.id}`
-        const tocItem = document.querySelector(`a[href="${headingFragment}"]`)
-
-        if (entry.isIntersecting) {
-          const previouslyActivatedItem =
-            document.querySelector('.active-toc-item')
-
-          previouslyActivatedItem?.classList.remove('active-toc-item')
-          tocItem.classList.add('active-toc-item')
-        } else {
-          const isAnyOtherEntryIntersecting = entries.some(
-            (e) => e.target.id !== entry.target.id && e.isIntersecting
-          )
-
-          if (isAnyOtherEntryIntersecting) {
-            tocItem.classList.remove('active-toc-item')
-          }
-        }
-      }
-    },
-    { root: null, rootMargin: '0px', threshold: [1]
-  
-  
-  
-  
-  }
-  )
-
-  const sectionHeadings = document.querySelectorAll(
-    'article > h2, article > h3'
-  )
-
-  for (const heading of sectionHeadings) {
-    observer.observe(heading)
-  }
-</script> -->
 <style>
   aside {
     position: sticky;
@@ -196,7 +126,7 @@
     }
     & button {
       /* translate: 100px; */
-      width: 30px;
+      width: 50px;
       aspect-ratio: 1/1;
       padding: 0;
     }
@@ -204,6 +134,5 @@
 
   :global(.active-toc-item) {
     font-weight: bold;
-    background: red;
   }
 </style>

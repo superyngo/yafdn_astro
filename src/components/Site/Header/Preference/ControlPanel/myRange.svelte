@@ -4,7 +4,9 @@
     max: string,
     value: string,
     id: string,
-    cssVarName: string = ''
+    cssVarName: string = '',
+    text: string = ''
+
   $: {
     if (isBrowser() && cssVarName) {
       document.documentElement.style.setProperty(cssVarName, value + 'px')
@@ -13,5 +15,5 @@
   }
 </script>
 
-<label for={id}>Font size : {value}px</label>
+<label for={id}><span>{text} : {value}px</span></label>
 <input type="range" {min} {max} {id} bind:value />

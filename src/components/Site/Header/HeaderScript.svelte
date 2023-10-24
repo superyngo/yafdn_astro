@@ -20,15 +20,15 @@
     window.addEventListener(
       'scrollend',
       () => {
-        $specialHandler = false
+        $specialHandler && ($specialHandler = false)
       },
       true
     )
   }
 
   function handleScroll() {
+    if ($specialHandler) return
     if (
-      $specialHandler ||
       $ToCToggleHandler ||
       $ControlPanelToggleHandler ||
       $windowsScrollY < $headerHeight

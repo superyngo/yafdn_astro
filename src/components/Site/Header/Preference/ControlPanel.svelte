@@ -47,6 +47,7 @@
       bind:value={controlDefaultConfig.fontSize}
       id="fontSizeRange"
       cssVarName="--font-size"
+      text="Font size"
     ></MyRange>
   </div>
   <div class="menuItem">
@@ -56,6 +57,7 @@
       bind:value={controlDefaultConfig.lineHeight}
       id="lineHeightRange"
       cssVarName="--line-height"
+      text="Line height"
     ></MyRange>
   </div>
   <button on:click={setToDefault}>Set to defalut</button>

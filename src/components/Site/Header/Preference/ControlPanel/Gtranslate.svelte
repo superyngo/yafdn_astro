@@ -14,7 +14,7 @@
 <label for="language"><span>Language</span></label>
 <div class={'gtranslate_wrapper'}></div>
 
-<style scoped>
+<style>
   * {
     width: 100%;
   }

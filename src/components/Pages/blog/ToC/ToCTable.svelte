@@ -15,21 +15,18 @@
     $headerToggleHandler = false
     $specialHandler = true
   }
-  function locationHref(href: string) {
-    location.href = href
-  }
   let timeoutId: number
 </script>
 
-<div>
+<div class="wrapper">
   {#each groupedHeadings as h}
     <p>
       <a
         on:click={anchorClick}
         on:mouseenter={() =>
           (timeoutId = setTimeout(() => {
-            locationHref(`#${h.slug}`)
-          }, 300))}
+            location.href = `#${h.slug}`
+          }, 450))}
         on:mouseleave={() => clearTimeout(timeoutId)}
         on:focus={() => {
           void 0
@@ -44,8 +41,8 @@
   {/each}
 </div>
 
-<style scoped>
-  div {
+<style>
+  .wrapper {
     padding-left: var(--header-padding);
     /* display: flex;
     flex-direction: column;
@@ -53,6 +50,9 @@
     align-items: start; */
     & a {
       word-break: break-all;
+    }
+    & p {
+      text-align: left;
     }
   }
 </style>
