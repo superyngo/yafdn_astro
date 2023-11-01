@@ -11,9 +11,9 @@
   }
   export let groupedHeadings: HeadingWithSubheadings[]
   function anchorClick() {
+    $specialHandler = true
     $ToCToggleHandler = false
     $headerToggleHandler = false
-    $specialHandler = true
   }
   let timeoutId: number
 </script>
@@ -23,10 +23,12 @@
     <p>
       <a
         on:click={anchorClick}
-        on:mouseenter={() =>
-          (timeoutId = setTimeout(() => {
+        on:mouseenter={() => {
+          $specialHandler = true
+          timeoutId = setTimeout(() => {
             location.href = `#${h.slug}`
-          }, 450))}
+          }, 450)
+        }}
         on:mouseleave={() => clearTimeout(timeoutId)}
         on:focus={() => {
           void 0

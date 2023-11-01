@@ -7,6 +7,7 @@
 }
 * {
   scroll-margin-top: var(--header-height);
+  scroll-behaviour: smooth;
 }
 
 .hide {

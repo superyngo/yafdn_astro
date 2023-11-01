@@ -1,7 +1,14 @@
+import { specialHandler } from 'lib/stores/state'
+let $specialHandler: boolean
+const unsubscribe = specialHandler.subscribe(
+  (value) => ($specialHandler = value)
+)
+
 type State = {
   entrySet: Set<HTMLElement>
+  tempToCBoxDom: HTMLElement | null
 }
-const state: State = { entrySet: new Set() }
+const state: State = { entrySet: new Set(), tempToCBoxDom: null }
 
 export const isBrowser = () => typeof window !== 'undefined'
 
@@ -30,13 +37,16 @@ export function ToCHighlighting(
 ) {
   const observer = new IntersectionObserver(
     (entries) => {
-      const ToCBoxDom = document.querySelector(ToCBoxSelector)
+      const ToCBoxDom = document.querySelector(ToCBoxSelector) as HTMLElement
 
       for (const entry of entries) {
         const headingFragment = `#${entry.target.id}`
-        const tocItem = ToCBoxDom.querySelector(`a[href="${headingFragment}"]`)
+        const tocItem = ToCBoxDom.querySelector(
+          `a[href="${headingFragment}"]`
+        ) as HTMLElement
         if (entry.isIntersecting) {
           state.entrySet.add(tocItem)
+          state.tempToCBoxDom = tocItem
         } else {
           state.entrySet.delete(tocItem)
         }
@@ -44,14 +54,29 @@ export function ToCHighlighting(
       ToCBoxDom.querySelectorAll('.active-toc-item').forEach(
         (e) => e?.classList.remove('active-toc-item')
       )
-      const highestHeading = [...state.entrySet].reduce(
-        (a, c) => {
-          c.offsetTop < a.offsetTop && (a = c)
-          return a
-        },
-        { offsetTop: Infinity } as HTMLElement
-      )
+      const highestHeading =
+        state.entrySet.size > 0
+          ? [...state.entrySet].reduce(
+              (a, c) => {
+                c.offsetTop < a.offsetTop && (a = c)
+                return a
+              },
+              { offsetTop: Infinity } as HTMLElement
+            )
+          : state.tempToCBoxDom
       highestHeading?.classList.add('active-toc-item')
+      // highestHeading?.scrollIntoView({
+      //   behavior: 'smooth',
+      //   block: 'end',
+      //   inline: 'nearest'
+      // })
+      console.log($specialHandler)
+      !$specialHandler &&
+        ToCBoxDom.scroll({
+          top: highestHeading?.offsetTop as number,
+          behavior: 'smooth'
+        })
+      // console.log(highestHeading?.offsetTop)
     },
     { root: null, rootMargin: '0px' }
   )
